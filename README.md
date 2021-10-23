@@ -45,10 +45,10 @@ return User::orderBy('id')->cursorPaginate(5);
 ```
 After:
 ```php
-return User::orderBy('id')->cursorPaginateWithNullValues(5)
+return User::orderBy('id')->cursorPaginateWithNullValues(5);
 ```
 ```php
-return User::orderBy('nullable_column')->orderBy('id')->cursorPaginateWithNullValues(5)
+return User::orderBy('nullable_column')->orderBy('id')->cursorPaginateWithNullValues(5);
 ```
 
 ## Testing
