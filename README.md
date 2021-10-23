@@ -13,6 +13,8 @@ Columns with null values are not supported in the current Laravel implementation
 
 https://laravel.com/docs/8.x/pagination#cursor-vs-offset-pagination
 
+Currently works for database drivers: **sqlite**, **mysql** and **sqlserver**
+
 ---
 
 ## Installation
