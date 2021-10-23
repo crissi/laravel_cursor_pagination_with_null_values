@@ -28,9 +28,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-cursor-pagination-with-null-values_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/2021_10_18_192048_customer.php';
         $migration->up();
-        */
     }
 }

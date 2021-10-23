@@ -1,4 +1,4 @@
-# This is my package laravel-cursor-pagination-with-null-values
+# Laravel cursor pagination with null values
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/crissi/laravel-cursor-pagination-with-null-values.svg?style=flat-square)](https://packagist.org/packages/crissi/laravel-cursor-pagination-with-null-values)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/crissi/laravel-cursor-pagination-with-null-values/run-tests?label=tests)](https://github.com/crissi/laravel-cursor-pagination-with-null-values/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -6,24 +6,14 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/crissi/laravel-cursor-pagination-with-null-values.svg?style=flat-square)](https://packagist.org/packages/crissi/laravel-cursor-pagination-with-null-values)
 
 ---
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+Adds a new method to allow cursor pagination to work with column that can have null values using the same method argument signature as Laravel's current **cursorPaginate**-method. 
 
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this laravel-cursor-pagination-with-null-values
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files
-3. Remove this block of text.
-4. Have fun creating your package.
-5. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
+Why?
+Columns with null values are not supported in the current Laravel implementation as mentioned in Laravel's docs.
+
+https://laravel.com/docs/8.x/pagination#cursor-vs-offset-pagination
+
 ---
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel_cursor_pagination_with_null_values.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel_cursor_pagination_with_null_values)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -43,14 +33,22 @@ This is the contents of the published config file:
 
 ```php
 return [
-];
+    'method_name' => 'cursorPaginateWithNullValues'
+];;
 ```
 
 ## Usage
 
+Before: 
 ```php
-$laravel-cursor-pagination-with-null-values = new Crissi\LaravelCursorPaginationWithNullValues();
-echo $laravel-cursor-pagination-with-null-values->echoPhrase('Hello, Crissi!');
+return User::orderBy('id')->cursorPaginate(5);
+```
+After:
+```php
+return User::orderBy('id')->cursorPaginateWithNullValues(5)
+```
+```php
+return User::orderBy('nullable_column')->orderBy('id')->cursorPaginateWithNullValues(5)
 ```
 
 ## Testing
