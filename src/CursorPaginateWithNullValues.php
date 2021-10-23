@@ -1,4 +1,5 @@
 <?php
+
 namespace Crissi\LaravelCursorPaginationWithNullValues;
 
 class CursorPaginateWithNullValues

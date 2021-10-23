@@ -1,18 +1,18 @@
 <?php
+
 namespace Crissi\LaravelCursorPaginationWithNullValues;
 
-use Illuminate\Pagination\Cursor;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\Cursor;
 use Illuminate\Pagination\CursorPaginator;
-use Crissi\LaravelCursorPaginationWithNullValues\CursorPaginateWithNullValues;
+use Illuminate\Pagination\Paginator;
 
 class NullValueCursorPagination
 {
     public function implementation()
     {
         return function ($perPage, $columns = ['*'], $cursorName = 'cursor', $cursor = null) {
-            if (!$cursor instanceof Cursor) {
+            if (! $cursor instanceof Cursor) {
                 $cursor = is_string($cursor)
                     ? Cursor::fromEncoded($cursor)
                     : CursorPaginator::resolveCurrentCursor($cursorName, $cursor);
