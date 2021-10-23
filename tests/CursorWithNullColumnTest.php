@@ -1,42 +1,43 @@
 <?php
 
-use Illuminate\Pagination\Cursor;
+use Crissi\LaravelCursorPaginationWithNullValues\Database\Models\Customer;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Crissi\LaravelCursorPaginationWithNullValues\Database\Models\Customer;
- 
+use Illuminate\Pagination\Cursor;
+
 uses(RefreshDatabase::class);
 
-function paginate($query, ?Cursor $cursor) {
+function paginate($query, ?Cursor $cursor)
+{
     return $query->cursorPaginateWithNullValues(1, ['*'], null, $cursor);
 }
 
 it('can cursor paginate by ordering desc', function () {
     $customer = Customer::factory()->create([
         'email' => 'mail@mail.dk',
-        'name' => 'Hanson'
+        'name' => 'Hanson',
     ]);
-    
+
     $null1 = Customer::factory()->create([
         'email' => null,
-        'name' => 'Peter'
+        'name' => 'Peter',
     ]);
 
     $null2 = Customer::factory()->create([
         'email' => null,
-        'name' => 'Jens'
+        'name' => 'Jens',
     ]);
 
     $page1 = paginate(Customer::orderBy('email', 'DESC')->orderBy('id', 'DESC'), null);
     $this->assertEquals($customer->id, $page1[0]->id);
-    
+
     $nextCursor = $page1->nextCursor();
 
     $page2 = paginate(Customer::orderBy('email', 'DESC')->orderBy('id', 'DESC'), $nextCursor);
     $this->assertEquals($null2->id, $page2[0]->id);
 
     $nextCursor = $page2->nextCursor();
-    
+
     $page3 = paginate(Customer::orderBy('email', 'DESC')->orderBy('id', 'DESC'), $nextCursor);
     $this->assertEquals($null1->id, $page3[0]->id);
     $this->assertNull($page3->nextCursor());
@@ -58,30 +59,30 @@ it('can cursor paginate by ordering desc', function () {
 it('can cursor paginate by ordering asc', function () {
     $customer = Customer::factory()->create([
         'email' => 'mail@mail.dk',
-        'name' => 'Hanson'
+        'name' => 'Hanson',
     ]);
-    
+
     $null1 = Customer::factory()->create([
         'email' => null,
-        'name' => 'Peter'
+        'name' => 'Peter',
     ]);
 
     $null2 = Customer::factory()->create([
         'email' => null,
-        'name' => 'Jens'
+        'name' => 'Jens',
     ]);
 
     $page1 = paginate(Customer::orderBy('email', 'ASC')->orderBy('id', 'ASC'), null);
 
     $this->assertEquals($null1->id, $page1[0]->id);
-    
+
     $nextCursor = $page1->nextCursor();
 
     $page2 = paginate(Customer::orderBy('email', 'ASC')->orderBy('id', 'ASC'), $nextCursor);
     $this->assertEquals($null2->id, $page2[0]->id);
 
     $nextCursor = $page2->nextCursor();
-    
+
     $page3 = paginate(Customer::orderBy('email', 'ASC')->orderBy('id', 'ASC'), $nextCursor);
     $this->assertEquals($customer->id, $page3[0]->id);
     $this->assertNull($page3->nextCursor());
@@ -99,4 +100,3 @@ it('can cursor paginate by ordering asc', function () {
 
     $this->assertNull($page1Back->previousCursor());
 });
-

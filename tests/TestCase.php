@@ -2,9 +2,9 @@
 
 namespace Crissi\LaravelCursorPaginationWithNullValues\Tests;
 
+use Crissi\LaravelCursorPaginationWithNullValues\LaravelCursorPaginationWithNullValuesServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Crissi\LaravelCursorPaginationWithNullValues\LaravelCursorPaginationWithNullValuesServiceProvider;
 
 class TestCase extends Orchestra
 {
