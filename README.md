@@ -1,4 +1,5 @@
 # Laravel cursor pagination with null values
+For the Query builder and the Eloquent Query builder
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/crissi/laravel-cursor-pagination-with-null-values.svg?style=flat-square)](https://packagist.org/packages/crissi/laravel-cursor-pagination-with-null-values)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/crissi/laravel-cursor-pagination-with-null-values/run-tests?label=tests)](https://github.com/crissi/laravel-cursor-pagination-with-null-values/actions?query=workflow%3Arun-tests+branch%3Amain)
